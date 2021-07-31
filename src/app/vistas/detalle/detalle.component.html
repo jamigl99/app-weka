@@ -1,0 +1,36 @@
+<app-header></app-header>
+
+<div class="container">
+
+    <h3>Cuadro Detalle</h3><br>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Cluster</th>
+            <th scope="col">Título</th>
+            <th scope="col">Categoria</th>
+            
+            
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let instance of instances.clusters | keyvalue">
+                <th scope="row">{{instance.key}}</th>
+                <td>
+                    <p *ngFor="let info of instance.value">
+                        {{ info.split(':')[1] }}
+                    </p>
+                </td>
+                <td>
+                    <p *ngFor="let info of instance.value">
+                        {{ info.split(':')[0] }}
+                    </p>
+                </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<app-footer></app-footer>
