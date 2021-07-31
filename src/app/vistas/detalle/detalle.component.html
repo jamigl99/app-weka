@@ -7,6 +7,7 @@
     <table class="table">
         <thead>
         <tr>
+<!--             <th scope="col">Indice</th> -->
             <th scope="col">Cluster</th>
             <th scope="col">Título</th>
             <th scope="col">Categoria</th>
@@ -16,7 +17,11 @@
         </thead>
         <tbody>
         <tr *ngFor="let instance of instances.clusters | keyvalue">
-                <th scope="row">{{instance.key}}</th>
+                <th scope="row">
+                    <p *ngFor="let info of instance.value">
+                        {{ instance.key }}
+                    </p>
+                </th>
                 <td>
                     <p *ngFor="let info of instance.value">
                         {{ info.split(':')[1] }}

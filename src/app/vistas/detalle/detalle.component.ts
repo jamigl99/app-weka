@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class DetalleComponent implements OnInit {
 
   instances!: ClusteredInstancesI;
+  i:number=0;
 
   constructor(private api:ApiService, private router:Router) { }
 

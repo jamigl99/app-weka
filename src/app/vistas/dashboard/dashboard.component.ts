@@ -30,6 +30,7 @@ export class DashboardComponent implements OnInit {
 
   mostrar(form:PeticiónI){
     this.api.getAllClusters(form).subscribe(data =>{
+/*       data.clusters[0].porcentaje = Math.round(data.clusters[0].porcentaje * 100) / 100).toFixed(2); */
       this.hierClus =data;
     })
   }
