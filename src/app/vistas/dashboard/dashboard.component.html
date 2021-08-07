@@ -2,16 +2,25 @@
 
 <div class="container">
 
+
     <h3>Cuadro Resumen</h3><br>
 
     <form [formGroup]="peticionForm" (ngSubmit)="mostrar(peticionForm.value)">
         <div class="form-group">
                 <label for="exampleFormControlInput1">Criterio de Vinculación</label>
-                <input type="text" class="form-control" placeholder="Link" formControlName="link">
+                <select class="form-select" id="inputGroupSelect01" formControlName="link">
+                    <option disabled selected>Selecciona una opción</option>
+                    <option value="single">single</option>
+                    <option value="complete">complete</option>
+                    <option value="centroid">centroid</option>
+                    <option value="average">average</option>
+                    <option value="mean">mean</option>
+                    <option value="ward">ward</option>
+                </select>
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput1">N° Clusters</label>
-            <input type="number" class="form-control" placeholder="número" formControlName="clusters">
+            <input type="number" min="1" class="form-control" placeholder="número" formControlName="clusters">
     </div><br>
         <button type="submit" class="btn btn-success">Mostrar</button>
     </form><br>
@@ -20,16 +29,18 @@
     <table class="table">
         <thead>
         <tr>
-            <th scope="col">Cluster</th>
-            <th scope="col">Cantidad</th>
-            <th scope="col">Porcentaje</th>
+            <th style="text-align: center;" scope="col">Índice</th>
+            <th style="text-align: center;" scope="col">Cluster</th>
+            <th style="text-align: center;" scope="col">Cantidad</th>
+            <th style="text-align: center;" scope="col">Porcentaje</th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let cluster of hierClus.clusters">
-            <th scope="row">{{ cluster.indice }}</th>
-            <td>{{ cluster.tamanio }}</td>
-            <td>{{ cluster.porcentaje }}</td>
+        <tr *ngFor="let cluster of hierClus.clusters; let i = index">
+            <th style="text-align: center;" scope="row">{{ i + 1 }}</th>
+            <td style="text-align: center;">{{ cluster.indice }}</td>
+            <td style="text-align: center;">{{ cluster.tamanio }}</td>
+            <td style="text-align: center;">{{ cluster.porcentaje }}%</td>
         </tr>
         </tbody>
     </table>

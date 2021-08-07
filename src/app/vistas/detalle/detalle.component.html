@@ -1,13 +1,13 @@
 <app-header></app-header>
 
 <div class="container">
-
+    <button type="button" class="btn btn-danger" (click)="salir()">Salir</button>
     <h3>Cuadro Detalle</h3><br>
 
     <table class="table">
         <thead>
         <tr>
-<!--             <th scope="col">Indice</th> -->
+            <th scope="col">Indice</th>
             <th scope="col">Cluster</th>
             <th scope="col">Título</th>
             <th scope="col">Categoria</th>
@@ -16,23 +16,12 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let instance of instances.clusters | keyvalue">
-                <th scope="row">
-                    <p *ngFor="let info of instance.value">
-                        {{ instance.key }}
-                    </p>
-                </th>
-                <td>
-                    <p *ngFor="let info of instance.value">
-                        {{ info.split(':')[1] }}
-                    </p>
-                </td>
-                <td>
-                    <p *ngFor="let info of instance.value">
-                        {{ info.split(':')[0] }}
-                    </p>
-                </td>
-        </tr>
+            <tr *ngFor="let instance of instances.instances">
+                <th scope="row">{{ instance.indice }}</th>
+                <td>{{ instance.cluster }}</td>
+                <td>{{ instance.attr1 }}</td>
+                <td>{{ instance.attr2 }}</td>
+            </tr>
         </tbody>
     </table>
 
