@@ -1,12 +1,28 @@
-.resumen {
-	width:49.5%;
+.consulta {
+	margin-top: 5%;
+	width:35%;
 	display:inline-block;
-	height:49.5%;
+	height:30%;
 	overflow:hidden;
-}
+}	
 .graficos {
-	width:49.5%;
+	margin-left: 30%;
+	margin-top: 0%;
 	display:inline-block;
-	height:49.5%;
-	overflow:hidden;
 }
+
+.tabla-resumen{
+	width: 35%;
+	height:200px;
+	overflow:auto;
+
+}
+
+thead tr th{ 
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: #4d7275;
+	color: #fff;
+}
+  

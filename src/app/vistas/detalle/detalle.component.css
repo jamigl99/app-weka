@@ -1,0 +1,14 @@
+.tabla-detalle{
+	height: 350px;
+	overflow:auto;
+
+}
+
+thead tr th{ 
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: #4d7275;
+	color: #fff;
+}
+  

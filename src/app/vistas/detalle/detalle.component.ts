@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../servicios/api/api.service';
 import { ClusteredInstancesI } from '../../modelos/ClusteredInstances.interface';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import {FormGroup, FormControl, Validators } from '@angular/forms';
+import { PeticiónI } from '../../modelos/petición.interface';
 
 @Component({
   selector: 'app-detalle',
@@ -11,14 +13,19 @@ import { Router } from '@angular/router';
 export class DetalleComponent implements OnInit {
 
   instances!: ClusteredInstancesI;
-  i:number=0;
+  link:any;
+  clusters:any;
 
-  constructor(private api:ApiService, private router:Router) { }
+  constructor(private api:ApiService, private router:Router, private activatedrouter:ActivatedRoute) { }
 
   ngOnInit(): void {
     this.api.getAllInstances().subscribe(data =>{
       this.instances = data;
     })
+/*     this.link = this.activatedrouter.snapshot.paramMap.get('link');
+    this.clusters = this.activatedrouter.snapshot.paramMap.get('clusters');
+
+    console.log(this.link, this.clusters); */
   }
 
   salir(){
