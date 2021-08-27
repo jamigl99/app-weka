@@ -4,4 +4,5 @@ export interface HierarchicalClusterI{
     n_instancias:number;
     n_clusters:number;
     clusters:ClusterI[];
+    image:string;
 }

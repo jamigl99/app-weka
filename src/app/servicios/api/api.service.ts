@@ -14,7 +14,7 @@ export class ApiService {
 
   constructor(private http:HttpClient) { }
 
-  getAllClusters(form:PeticiónI):Observable<HierarchicalClusterI>{
+  getAllClusters(form:any):Observable<HierarchicalClusterI>{
     let direccion = this.url;
     return this.http.post<HierarchicalClusterI>(direccion, form);
   }

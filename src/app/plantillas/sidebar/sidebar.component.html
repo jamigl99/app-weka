@@ -1,0 +1,84 @@
+<div class="sidebar" [ngClass]="{'open':sidebar==='open'}">
+    <div class="logo-details" >
+        <i class='bx bx-aperture' [ngClass]="{'bx-aperture':sidebar==='open'}"></i>
+        <div class="logo_name">Random</div>
+        <a (click)="ajustarSidebar()">
+            <i class="bx" id="btn" [ngClass]="{'bx-menu-alt-right':sidebar=='open','bx-menu':sidebar=='close'}"></i>
+        </a>
+    </div>
+    <ul class="nav-list">
+<!--         <li>
+            <a (click)="ajustarSidebar()">
+                <i class='bx bx-search'></i>
+            </a>
+            <input type="text" placeholder="Search...">
+            <span class="tooltip">Search</span>
+        </li> -->
+        <li>
+            <a href="#">
+                <i class='bx bx-bar-chart-alt-2'></i>
+                <span class="links_name">Hierchical Clustering</span>
+            </a>
+            <span class="tooltip">Hierchical Clustering</span>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bx-pie-chart-alt-2'></i>
+                <span class="links_name">Kmeans</span>
+            </a>
+            <span class="tooltip">Kmeans</span>
+        </li>
+<!--         <li>
+            <a href="#">
+                <i class='bx bx-chat'></i>
+                <span class="links_name">Messages</span>
+            </a>
+            <span class="tooltip">Messages</span>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bx-pie-chart-alt-2'></i>
+                <span class="links_name">Analytics</span>
+            </a>
+            <span class="tooltip">Analytics</span>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bx-folder'></i>
+                <span class="links_name">File Manager</span>
+            </a>
+            <span class="tooltip">Files</span>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bx-cart-alt'></i>
+                <span class="links_name">Order</span>
+            </a>
+            <span class="tooltip">Order</span>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bx-heart'></i>
+                <span class="links_name">Saved</span>
+            </a>
+            <span class="tooltip">Saved</span>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bx-cog'></i>
+                <span class="links_name">Setting</span>
+            </a>
+            <span class="tooltip">Setting</span>
+        </li>
+        <li class="profile">
+            <div class="profile-details">
+                <img src="profile.jpg" alt="profileImg">
+                <div class="name_job">
+                    <div class="name">Prem Shahi</div>
+                    <div class="job">Web designer</div>
+                </div>
+            </div>
+            <i class='bx bx-log-out' id="log_out"></i>
+        </li> -->
+    </ul>
+</div>

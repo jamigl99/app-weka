@@ -1,18 +1,34 @@
+.home-section{
+	position: relative;
+/* 	background: #E4E9F7; */
+	min-height: 100vh;
+	top: 0;
+	left: 78px;
+	width: calc(100% - 78px);
+	transition: all 0.5s ease;
+	z-index: 2;
+  }
+
+.home-section .text{
+	display: inline-block;
+	color: #11101d;
+	font-size: 25px;
+	font-weight: 500;
+	margin: 18px
+  }
+
 .consulta {
 	margin-top: 5%;
-	width:35%;
 	display:inline-block;
 	height:30%;
 	overflow:hidden;
 }	
-.graficos {
-	margin-left: 30%;
-	margin-top: 0%;
-	display:inline-block;
-}
+/* .graficos {
+	border-top-color: #11101d;
+} */
 
 .tabla-resumen{
-	width: 35%;
+	width: 77%;
 	height:200px;
 	overflow:auto;
 
@@ -25,4 +41,16 @@ thead tr th{
 	background: #4d7275;
 	color: #fff;
 }
-  
+
+.container-left{
+	width: 40%; 
+	float: left;
+	margin: 1% 1%;
+}
+
+.container-right{
+	width: 50%; 
+	float: right;
+	margin: 3% 1%;
+}
+

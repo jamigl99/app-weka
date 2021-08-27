@@ -10,6 +10,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SidebarComponent } from './plantillas/sidebar/sidebar.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -1,60 +1,74 @@
-<!-- <app-header> </app-header> -->
-<div class="container">
-    <div class="consulta">
-        <span class="input-group-text"><i style="margin-right: 10px" class="far fa-edit"></i> Consulta </span><br>
-        <form [formGroup]="peticionForm" (ngSubmit)="mostrar(peticionForm.value)">
-            <div class="form-group">
-                <div class="input-group mb-3">
-                    <label class="input-group-text" for="exampleFormControlInput1">Criterio de Vinculación</label>
-                    <select class="form-select" id="inputGroupSelect01" formControlName="link">
-                        <option disabled selected>Selecciona una opción</option>
-                        <option value="single">SINGLE</option>
-                        <option value="complete">COMPLETE</option>
-                        <option value="centroid">CENTROID</option>
-                        <option value="average">AVERAGE</option>
-                        <option value="mean">MEAN</option>
-                        <option value="ward">WARD</option>
-                    </select>
+<app-sidebar> </app-sidebar>
+<section class="home-section">
+    <div class="container-left">
+        <div class="consulta">
+            <span class="input-group-text"><i style="margin-right: 10px" class="far fa-edit"></i> Consulta </span><br>
+            <form [formGroup]="peticionForm" (ngSubmit)="mostrar(peticionForm.value)">
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="exampleFormControlInput1">Criterio de Vinculación</label>
+                        <select class="form-select" id="inputGroupSelect01" formControlName="link">
+                            <option disabled selected>Selecciona una opción</option>
+                            <option value="single">SINGLE</option>
+                            <option value="complete">COMPLETE</option>
+                            <option value="centroid">CENTROID</option>
+                            <option value="average">AVERAGE</option>
+                            <option value="mean">MEAN</option>
+                            <option value="ward">WARD</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="input-group mb-3">
-                    <label class="input-group-text" for="exampleFormControlInput1">Número de Clusters</label>
-                    <input style="text-align: center;" type="number" min="1" oninput="validity.valid||(value='');"
-                        class="form-control" placeholder="Ingresar número" formControlName="clusters">
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="exampleFormControlInput1">Número de Clusters</label>
+                        <input style="text-align: center;" type="number" min="1" oninput="validity.valid||(value='');"
+                            class="form-control" placeholder="Ingresar número" formControlName="clusters">
+                    </div>
                 </div>
+                <button type="submit" class="btn btn-success">Mostrar <i class="fas fa-paper-plane"></i></button>
+                <button style="margin-left: 10px" type="button" class="btn btn-primary"
+                    (click)="verDetalle(peticionForm.value)">Ver Detalle
+                    <i class="far fa-file-alt"></i></button>
+                <button style="margin-left: 10px" type="button" class="btn btn-danger" (click)="Limpiar()">Limpiar <i
+                        class="fa fa-trash"></i></button>
+            </form><br>
+            <span *ngIf="imagen" class="input-group-text"><i style="margin-right: 10px" class="fa fa-table"></i> Cuadro Resumen</span>
+        </div>
+        <div *ngIf="imagen" class="tabla-resumen">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th style="text-align: center;" scope="col">#</th>
+                        <th style="text-align: center;" scope="col">Cluster</th>
+                        <th style="text-align: center;" scope="col">Cantidad</th>
+                        <th style="text-align: center;" scope="col">Porcentaje</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="hierClus">
+                    <tr *ngFor="let cluster of hierClus.clusters; let i = index">
+                        <th style="text-align: center;" scope="row">{{ i + 1 }}</th>
+                        <td style="text-align: center;">{{ cluster.indice }}</td>
+                        <td style="text-align: center;">{{ cluster.tamanio }}</td>
+                        <td style="text-align: center;">{{ cluster.porcentaje }}%</td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="!hierClus">
+                    <tr>
+                        <th style="text-align: center;" scope="row"></th>
+                        <td style="text-align: center;"></td>
+                        <td style="text-align: center;"></td>
+                        <td style="text-align: center;"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div *ngIf="imagen" class="container-right">
+        <div class="graficos">
+            <span class="input-group-text"><i style="margin-right: 10px" class="far fa-edit"></i> Dendograma </span><br>
+            <div class="recuadro-img">
+                <img *ngIf="imagen" [src]=" imagen " alt="" height="500px" width="100%">
             </div>
-            <button type="submit" class="btn btn-success">Mostrar <i class="fas fa-paper-plane"></i></button>
-            <button style="margin-left: 10px" type="button" class="btn btn-primary" (click)="verDetalle(peticionForm.value)">Ver Detalle
-                <i class="far fa-file-alt"></i></button>
-            <button style="margin-left: 10px" type="button" class="btn btn-danger" (click)="Limpiar()">Limpiar <i
-                    class="fa fa-trash"></i></button>
-        </form><br>
-        <span class="input-group-text"><i style="margin-right: 10px" class="fa fa-table"></i> Cuadro Resumen</span>
+        </div>
     </div>
-    <div class="graficos">
-        <p style="text-align: center;">Dendograma</p>
-    </div>
-    <div class="tabla-resumen">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th style="text-align: center;" scope="col">#</th>
-                    <th style="text-align: center;" scope="col">Cluster</th>
-                    <th style="text-align: center;" scope="col">Cantidad</th>
-                    <th style="text-align: center;" scope="col">Porcentaje</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let cluster of hierClus.clusters; let i = index">
-                    <th style="text-align: center;" scope="row">{{ i + 1 }}</th>
-                    <td style="text-align: center;">{{ cluster.indice }}</td>
-                    <td style="text-align: center;">{{ cluster.tamanio }}</td>
-                    <td style="text-align: center;">{{ cluster.porcentaje }}%</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<app-footer></app-footer>
+</section>
