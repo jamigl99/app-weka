@@ -5,8 +5,10 @@ import { PeticiónI } from '../../modelos/petición.interface';
 import { HierarchicalClusterI } from '../../modelos/HierarchicalCluster.interface';
 import { LinkI } from '../../modelos/links.interface';
 import { DataService } from '../../servicios/api/data.service';
-import { Router, RouterLinkWithHref } from '@angular/router';
+import { Router, RouterLinkWithHref, Event, NavigationStart, NavigationEnd} from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { delay } from 'rxjs/operators';
+import { SpinnerService } from 'src/app/servicios/api/spinner.service';
 
 
 
@@ -26,6 +28,8 @@ export class DashboardComponent implements OnInit {
   imgUrl!: SafeResourceUrl;
   imagen: any;
   peticion:any;
+  showLoadingIndicator = true;
+  dimensiones: Array<String> = ['htitulo_cat','titulo','empresa','lugar','salario'];
 
   peticionForm = new FormGroup({
     link: new FormControl(''),
@@ -33,8 +37,24 @@ export class DashboardComponent implements OnInit {
   })
   
 
-  constructor(private api: ApiService, private router: Router, private dataS: DataService, private domSanitizer: DomSanitizer) {
-
+  constructor(private api: ApiService, private router: Router, 
+    private dataS: DataService, private domSanitizer: DomSanitizer, spinnerSvc: SpinnerService) {
+/*       this.router.events.subscribe((routerEvent: Event) => {
+        if(routerEvent instanceof NavigationStart){
+          spinnerSvc.show();
+          this.showLoadingIndicator = true; 
+          console.log("cambiando de pagina a true");
+          console.log(this.showLoadingIndicator);
+        }
+  
+         if(routerEvent instanceof NavigationEnd){
+          spinnerSvc.hide();
+          this.showLoadingIndicator = false;
+          console.log("cambiando de pagina a false");
+          console.log(this.showLoadingIndicator);
+        } 
+  
+      }); */
   }
 
   ngOnInit(): void {
@@ -42,10 +62,7 @@ export class DashboardComponent implements OnInit {
     this.link_local = localStorage.getItem('link');
     this.clusters_local = localStorage.getItem('clusters');
     this.imagen = localStorage.getItem('img');
-    console.log(this.imagen);
     if (this.link_local != undefined && this.clusters_local != undefined && this.imagen != undefined) {
-      console.log("Variables contienen valor");
-      console.log(this.link_local, this.clusters_local);
       this.peticionForm.setValue({
         link: this.link_local,
         clusters: this.clusters_local,
@@ -54,31 +71,25 @@ export class DashboardComponent implements OnInit {
       localStorage.clear();
     }
     else {
-      console.log("Variables no contienen valor");
     }
-    console.log(localStorage.getItem('link'), localStorage.getItem('clusters'), localStorage.getItem('img'));
+    
   }
 
   mostrar(form:any) {
     this.peticion = this.completarJson(form.link, form.clusters);
-    console.log(this.peticion);
     this.api.getAllClusters(this.peticion).subscribe(data => {
       this.hierClus = data;
-      console.log(this.hierClus);
-      this.hierClus.clusters.sort((a, b) => (a.tamanio < b.tamanio) ? 1 : -1);
+      this.hierClus.clusters.sort((a, b) => (a.tamanio < b.tamanio) ? -1 : 1);
       localStorage.setItem('link', form.link);
       localStorage.setItem('clusters', form.clusters.toString());
-      console.log(localStorage.getItem('link'), localStorage.getItem('clusters'));
       this.imagen = 'data:image/png;base64,'
         + this.hierClus.image;
       localStorage.setItem('img', this.imagen);
-      console.log(this.imagen);
     })
   }
   
   verDetalle(form: PeticiónI) {
     this.router.navigate(['detalle']);
-    console.log(form);
   }
 
   completarJson(link:string, clusters:number){
@@ -86,13 +97,24 @@ export class DashboardComponent implements OnInit {
       "columns": [
           "htitulo_cat",
           "titulo",
-          "empresa"
+          "empresa",
+          "lugar",
+          "salario",
+          "modalidad_trabajo",
+          "fecha_publicacion"
       ],
       "jerarq-method": link,
       "aglo-affinity": "euclidean",
       "aglo-linkage": link,
       "n_clusters": clusters
   })
+  }
+
+  key:string = 'id';
+  reverse: boolean = false;
+  sort(key:any){
+    this.key = key;
+    this.reverse = !this.reverse;
   }
 
   Limpiar() {
@@ -102,10 +124,6 @@ export class DashboardComponent implements OnInit {
     this.hierClus.n_instancias = 0;
     this.imagen = undefined;
     localStorage.clear();
-    console.log(this.hierClus.clusters);
-    console.log(this.hierClus.n_clusters);
-    console.log(this.hierClus.n_instancias);
-    console.log(this.imagen);
   }
 
   /*   verDetalleCluster(indice:number){

@@ -23,24 +23,21 @@
 	height:30%;
 	overflow:hidden;
 }	
-/* .graficos {
-	border-top-color: #11101d;
-} */
 
-.tabla-resumen{
+ .tabla-resumen{
 	width: 77%;
-	height:200px;
-	overflow:auto;
+ 	height:220px;
+	overflow:auto; 
 
 }
-
+/*
 thead tr th{ 
 	position: sticky;
 	top: 0;
 	z-index: 10;
 	background: #4d7275;
 	color: #fff;
-}
+} */
 
 .container-left{
 	width: 40%; 
@@ -49,8 +46,23 @@ thead tr th{
 }
 
 .container-right{
-	width: 50%; 
+	width: 54%; 
 	float: right;
-	margin: 3% 1%;
+	margin: 3% 2%;
 }
 
+.spinner {
+    border: 16px solid silver;
+    border-top: 16px solid #337AB7;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 700ms linear infinite;
+    top:50%;
+    left:50%;
+    position: absolute;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg) }
+    100% { transform: rotate(-360deg) }
+  }
