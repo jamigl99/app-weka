@@ -9,8 +9,7 @@ import { Router, RouterLinkWithHref, Event, NavigationStart, NavigationEnd } fro
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { delay } from 'rxjs/operators';
 import { SpinnerService } from 'src/app/servicios/api/spinner.service';
-
-
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-dashboard',
@@ -40,7 +39,8 @@ export class DashboardComponent implements OnInit {
 
 
   constructor(private api: ApiService, private router: Router,
-    private dataS: DataService, private domSanitizer: DomSanitizer, spinnerSvc: SpinnerService) {
+    private dataS: DataService, private domSanitizer: DomSanitizer, spinnerSvc: SpinnerService,
+    private spinnerService: NgxSpinnerService) {
   }
 
   ngOnInit(): void {
@@ -55,6 +55,8 @@ export class DashboardComponent implements OnInit {
         clusters: this.clusters_local,
         query: this.query_local,
       });
+      this.spinnerFunction();
+      this.imagen = undefined;
       this.mostrar(this.peticionForm.value);
       localStorage.clear();
     }
@@ -110,6 +112,14 @@ export class DashboardComponent implements OnInit {
   autoGrowTextZone(e: any) {
     e.target.style.height = "0px";
     e.target.style.height = (e.target.scrollHeight + 25) + "px";
+  }
+
+  spinnerFunction(): void{
+    this.spinnerService.show();
+    setTimeout(() => {
+      this.spinnerService.hide();
+    }, 8000);
+
   }
 
   Limpiar() {

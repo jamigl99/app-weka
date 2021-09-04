@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { CargarScriptsService } from '../../servicios/api/cargar-scripts.service';
 import { InstanceI } from 'src/app/modelos/Instance.interface';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-detalle',
@@ -27,18 +28,18 @@ export class DetalleComponent implements OnInit {
   p: number = 1;
   searchValue: string = "";
 
-  constructor(private api: ApiService, private router: Router, private activatedrouter: ActivatedRoute, private cargaScripts: CargarScriptsService) {
+  constructor(private api: ApiService, private router: Router, private activatedrouter: ActivatedRoute, private cargaScripts: CargarScriptsService, private spinnerService: NgxSpinnerService) {
     /*     cargaScripts.Carga(["/tablas"]);   */
   }
 
   ngOnInit(): void {
+    this.spinnerFunction();
     this.api.getAllInstances().subscribe(data => {
       this.instances = data;
       this.displayedColumns = this.setColumns(this.instances.atributos);
       this.dataSource = this.instances.instances;
       console.log(this.displayedColumns);
       console.log(this.dataSource);
-
     })
   }
 
@@ -114,6 +115,12 @@ export class DetalleComponent implements OnInit {
     this.reverse = !this.reverse;
   }
 
+  spinnerFunction(): void {
+    this.spinnerService.show();
+    setTimeout(() => {
+      this.spinnerService.hide();
+    }, 3000);
+  }
 
   salir() {
     this.router.navigate(['dashboard']);

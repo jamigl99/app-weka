@@ -29,6 +29,12 @@
 	overflow: auto;
 }
 
+.tabla-detalle{
+	height: 400px;
+	width:  100%;
+	overflow:auto;
+}
+
 thead tr th{ 
 	position: sticky;
 	top: 0;
@@ -63,4 +69,11 @@ thead tr th{
   @keyframes spin {
     0% { transform: rotate(0deg) }
     100% { transform: rotate(-360deg) }
+  }
+
+  
+  .message {
+	text-align: center;
+	color: #fff;
+	padding-left: 1em;
   }

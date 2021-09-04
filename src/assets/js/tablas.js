@@ -6,8 +6,8 @@
     });
  */
 
-function  myTest(){
+/* function  myTest(){
     alert("Welcome");
 }
 
-alert("Pop up");
+alert("Pop up"); */

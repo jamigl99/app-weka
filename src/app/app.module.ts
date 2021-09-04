@@ -18,6 +18,7 @@ import { SpinnerInterceptor } from './Interceptors/spinner.interceptors';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2OrderModule } from 'ng2-order-pipe';
 import {Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { CargarScriptsService } from './servicios/api/cargar-scripts.service';
 import { SearchfilterPipe } from './Pipes/searchfilter.pipe';
@@ -41,7 +42,8 @@ import { SearchfilterPipe } from './Pipes/searchfilter.pipe';
     BrowserAnimationsModule,
     NgxPaginationModule,
     Ng2OrderModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    NgxSpinnerModule
   ],
   providers: [
 /*     CargarScriptsService, */
