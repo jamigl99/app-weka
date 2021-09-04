@@ -1,9 +1,10 @@
-/* 
+
 .tabla-detalle{
 	height: 400px;
+	width:  100%;
 	overflow:auto;
-
 }
+
 
 thead tr th{ 
 	position: sticky;
@@ -12,4 +13,4 @@ thead tr th{
 	background: #4d7275;
 	color: #fff;
 }
-   */
+

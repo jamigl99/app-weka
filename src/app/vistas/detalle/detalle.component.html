@@ -1,22 +1,15 @@
-<!-- <app-header></app-header> -->
+
 <app-spinner> </app-spinner>
 <app-sidebar> </app-sidebar>
-<div class="container">
-    <button type="button" style="margin-top: 20px" class="btn btn-danger" (click)="salir()">Volver</button><br><br>
-    <span class="input-group-text"><i style="margin-right: 15px" class="fa fa-table"></i> Cuadro Detalle</span><br>
-    <!--     <div>
-        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
-            <ng-container *ngFor="let columna of columnas" matColumnDef="{{columna.name}}">
-                <th mat-header-cell *matHeaderCellDef> {{columna.titulo}} </th>
-                <td mat-cell *matCellDef="let element"> {{element[columna.name]}} </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-    </div> -->
-    <div class="tabla-detalle " width="100%">
-        <table id="dtBasicExample" class="table table-striped table-bordered" width="100%">
+<div class="container-detalle">
+    <span  style="margin-top: 20px;" class="input-group-text"><i style="margin-right: 15px;" class="fa fa-table"></i> Cuadro Detalle</span><br>
+    <div  class="form-group row">
+        <span for="search" class="input-group-text" style="text-align: center;width: 7%; margin-left: 1%;">Buscar</span>
+        <input style="width: 10%" type="text" [(ngModel)]="searchValue" class="form-control" placeholder="N° Cluster" id="search" />
+        <button type="button" style="width: 10%; margin-left: 71%;"  class="btn btn-danger" (click)="salir()">Volver</button>
+    </div><br>
+    <div class="tabla-detalle">
+        <table id="dtBasicExample" class="table table-striped table-bordered">
             <thead>
                 <tr>
                     <th>#</th>
@@ -27,7 +20,7 @@
                 </tr>
             </thead>
             <tbody *ngIf="instances">
-                <tr *ngFor="let instance of dataSource | paginate: { itemsPerPage:10, currentPage: p };let i=index;">
+                <tr *ngFor="let instance of dataSource | searchfilter:searchValue | paginate: { itemsPerPage:20, currentPage: p };let i=index;">
                     <td>{{ instance.indice+1 }}</td>
                     <td>{{ instance.cluster }}</td>
                     <td *ngFor="let attr of instance.atributos">
@@ -36,9 +29,8 @@
                 </tr>
             </tbody>
         </table>
-        <pagination-controls style="float: right;" (pageChange)="p=$event" previousLabel="Anterior"
-            nextLabel="Siguiente"></pagination-controls>
-    </div>
+    </div><br>
+    <pagination-controls style="float: right;" (pageChange)="p=$event" previousLabel="Anterior"
+    nextLabel="Siguiente"></pagination-controls>
 </div>
 
-<!-- <app-footer></app-footer> -->

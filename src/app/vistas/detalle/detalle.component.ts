@@ -6,6 +6,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PeticiónI } from '../../modelos/petición.interface';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { CargarScriptsService } from '../../servicios/api/cargar-scripts.service';
+import { InstanceI } from 'src/app/modelos/Instance.interface';
 
 @Component({
   selector: 'app-detalle',
@@ -21,17 +23,19 @@ export class DetalleComponent implements OnInit {
   columnas: string = "";
   atributos: any;
   col: any;
-  dataSource: any;
+  dataSource!: InstanceI[];
   p: number = 1;
+  searchValue: string = "";
 
-  constructor(private api: ApiService, private router: Router, private activatedrouter: ActivatedRoute) { }
+  constructor(private api: ApiService, private router: Router, private activatedrouter: ActivatedRoute, private cargaScripts: CargarScriptsService) {
+    /*     cargaScripts.Carga(["/tablas"]);   */
+  }
 
   ngOnInit(): void {
     this.api.getAllInstances().subscribe(data => {
       this.instances = data;
       this.displayedColumns = this.setColumns(this.instances.atributos);
       this.dataSource = this.instances.instances;
-      /*       this.atributos = this.setAtributos(this.instances.instances, this.displayedColumns.length); */
       console.log(this.displayedColumns);
       console.log(this.dataSource);
 
@@ -45,7 +49,7 @@ export class DetalleComponent implements OnInit {
         case 'htitulo_cat':
           columns[index] = 'Categoria';
           break;
-        case 'titulo':
+        case 'htitulo':
           columns[index] = 'Título';
           break;
         case 'empresa':
@@ -69,47 +73,39 @@ export class DetalleComponent implements OnInit {
         case 'fecha_publicacion':
           columns[index] = 'Fecha de Publicación';
           break;
-        case 'pagina_Web':
+        case 'pagina_web':
           columns[index] = 'Página Web';
           break;
         case 'funciones':
           columns[index] = 'Funciones';
           break;
-        case 'conocimientos':
+        case 'conocimiento':
           columns[index] = 'Conocimientos';
+          break;
+        case 'habilidades':
+          columns[index] = 'Habilidades';
+          break;
+        case 'periodo':
+          columns[index] = 'Periodo';
+          break;
+        case 'competencias':
+          columns[index] = 'Competencias';
+          break;
+        case 'certificaciones':
+          columns[index] = 'Certificaciones';
+          break;
+        case 'beneficio':
+          columns[index] = 'Beneficios';
+          break;
+        case 'formacion':
+          columns[index] = 'Formación';
           break;
         default:
           break;
       }
-      /*       this.col = {
-              titulo: titulo, name: columns[index]
-            }
-            this.columnas += JSON.stringify(this.col); */
     }
     return columns;
   }
-
-  /*   setAtributos(instances: any, tam:number) {
-      console.log(instances);
-      console.log(instances.length);
-      console.log(tam);
-      console.log(instances[0].attr0);
-      var arregloAtributos = this.Create2DArray(instances.length, instances.length);
-      for (let i = 0; i < instances.length; i++) {
-        for (let j = 0; j < tam; j++) {
-          arregloAtributos[i][j] = 1;
-        }
-      }
-      return arregloAtributos;
-    } */
-
-  /*   Create2DArray(rows: number, columns: number) {
-      var x = new Array(rows);
-      for (var i = 0; i < rows; i++) {
-        x[i] = new Array(columns);
-      }
-      return x;
-    } */
 
   key: string = 'id';
   reverse: boolean = false;

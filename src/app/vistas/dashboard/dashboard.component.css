@@ -1,6 +1,6 @@
 .home-section{
 	position: relative;
-/* 	background: #E4E9F7; */
+/* 	background-color:darkslateblue; */
 	min-height: 100vh;
 	top: 0;
 	left: 78px;
@@ -23,21 +23,19 @@
 	height:30%;
 	overflow:hidden;
 }	
-
- .tabla-resumen{
+.tabla-resumen{
+	height: 200px;
 	width: 77%;
- 	height:220px;
-	overflow:auto; 
-
+	overflow: auto;
 }
-/*
+
 thead tr th{ 
 	position: sticky;
 	top: 0;
 	z-index: 10;
 	background: #4d7275;
 	color: #fff;
-} */
+}
 
 .container-left{
 	width: 40%; 

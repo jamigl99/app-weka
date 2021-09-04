@@ -11,16 +11,16 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SidebarComponent } from './plantillas/sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatSliderModule } from '@angular/material/slider';
-import {MatTableModule} from '@angular/material/table';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { SpinnerComponent } from './plantillas/spinner/spinner.component';
 import { provideRoutes } from '@angular/router';
 import { SpinnerInterceptor } from './Interceptors/spinner.interceptors';
-import { MatPaginatorModule } from '@angular/material/paginator';
+
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2OrderModule } from 'ng2-order-pipe';
+import {Ng2SearchPipeModule } from 'ng2-search-filter';
 
+import { CargarScriptsService } from './servicios/api/cargar-scripts.service';
+import { SearchfilterPipe } from './Pipes/searchfilter.pipe';
 
 @NgModule({
   declarations: [
@@ -30,6 +30,7 @@ import { Ng2OrderModule } from 'ng2-order-pipe';
     routingComponents,
     SidebarComponent,
     SpinnerComponent,
+    SearchfilterPipe,
   ],
   imports: [
     BrowserModule,
@@ -38,14 +39,12 @@ import { Ng2OrderModule } from 'ng2-order-pipe';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatSliderModule,
-    MatTableModule,
-    MatProgressSpinnerModule,
-    MatPaginatorModule,
     NgxPaginationModule,
-    Ng2OrderModule
+    Ng2OrderModule,
+    Ng2SearchPipeModule
   ],
   providers: [
+/*     CargarScriptsService, */
     {provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
